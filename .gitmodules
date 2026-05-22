@@ -1,0 +1,18 @@
+[submodule "templates/openchad/Backend/openchad/litellm"]
+	path = templates/openchad/Backend/openchad/litellm
+	url = https://github.com/openchad/litellm-backend
+[submodule "templates/openchad/Backend/openchad/llamacpp"]
+	path = templates/openchad/Backend/openchad/llamacpp
+	url = https://github.com/openchad/llamacpp-backend
+[submodule "templates/openchad/ModelProvider/openchad/ProxyModelProvider"]
+	path = templates/openchad/ModelProvider/openchad/ProxyModelProvider
+	url = https://github.com/openchad/ProxyModelProvider
+[submodule "templates/openchad/ModelProvider/openchad/LocalModelProvider"]
+	path = templates/openchad/ModelProvider/openchad/LocalModelProvider
+	url = https://github.com/openchad/LocalModelProvider
+[submodule "templates/openchad/ModelProvider/openchad/LiteLLMModelProvider"]
+	path = templates/openchad/ModelProvider/openchad/LiteLLMModelProvider
+	url = https://github.com/openchad/LiteLLMModelProvider
+[submodule "templates/openchad/Pipeline/openchad/chat"]
+	path = templates/openchad/Pipeline/openchad/chat
+	url = https://github.com/openchad/pipeline-chat
