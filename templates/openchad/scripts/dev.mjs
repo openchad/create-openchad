@@ -47,7 +47,7 @@ function startViteAndDetectPort(vitePath) {
         // Relay Vite output to our own stdout while also scanning for the port
         const onData = (chunk) => {
             const text = chunk.toString();
-            process.stdout.write(text); // relay so the developer still sees Vite logs
+            // process.stdout.write(text); // relay so the developer still sees Vite logs
             if (!detectedPort) {
                 // Match "http://localhost:PORT/" or "http://127.0.0.1:PORT/"
                 const match = text.match(/https?:\/\/(?:localhost|127\.0\.0\.1):(\d+)/);
