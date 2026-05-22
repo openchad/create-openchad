@@ -281,13 +281,10 @@ async function main() {
 
       // 2b. Run uv sync — prefer global uv, fall back to the just-downloaded one
       const syncBin  = globalUv ? globalUv.path  : localUvPath;
-      const syncLabel = globalUv
-        ? `global ${globalUv.bin} (${pc.dim(globalUv.path)})`
-        : `local uv (${pc.dim(localUvPath)})`;
 
       if (syncBin) {
         const pySpinner = p.spinner();
-        pySpinner.start(`Installing Python dependencies via ${syncLabel}...`);
+        pySpinner.start(`Installing Python dependencies...`);
 
         const pyCode = await runCommand(syncBin, ['sync'], pythonDir);
         pySpinner.stop(
