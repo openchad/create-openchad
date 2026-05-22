@@ -1,0 +1,36 @@
+{
+  "name": "create-openchad",
+  "version": "1.0.2",
+  "description": "Easy tool for setup AI-Driven APP powered by OpenChad",
+  "main": "bin/index.js",
+  "bin": {
+    "openchad": "./bin/index.js"
+  },
+  "type": "module",
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "files": [
+    "bin",
+    "templates"
+  ],
+  "dependencies": {
+    "@clack/prompts": "^0.7.0",
+    "picocolors": "^1.0.0"
+  },
+  "keywords": [
+    "ai",
+    "automation",
+    "python",
+    "tauri",
+    "pytauri",
+    "react",
+    "vite",
+    "tailwind",
+    "template",
+    "npx",
+    "openchad"
+  ],
+  "author": "",
+  "license": "MIT"
+}

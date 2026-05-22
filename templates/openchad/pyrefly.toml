@@ -1,0 +1,16 @@
+python-interpreter-path = "python/.venv/Scripts/python.exe"
+site-package-path = ["python/.venv/Lib/site-packages"]
+search_path = [
+    "ModelProvider",
+    "Pipeline",
+    "Tools",
+    "Backend",
+    "python",
+]
+extraPaths = [
+    "ModelProvider",
+    "Pipeline",
+    "Tools",
+    "Backend",
+    "python",
+]

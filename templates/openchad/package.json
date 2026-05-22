@@ -1,0 +1,51 @@
+{
+  "name": "{{PROJECT_NAME}}",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "uv sync --directory ./python && node scripts/dev.mjs",
+    "pre": "uv build ./openchadpy && uv sync ./python",
+    "build": "npm run build:ui && tsc -b && vite build && node scripts/build.mjs",
+    "build:ui": "vite build --config vite.config.ts",
+    "lint": "eslint .",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@tailwindcss/vite": "^4.1.17",
+    "@tauri-apps/api": "^2.9.1",
+    "@tauri-apps/plugin-clipboard-manager": "^2.3.2",
+    "@tauri-apps/plugin-dialog": "^2.4.2",
+    "@tauri-apps/plugin-fs": "^2.5.1",
+    "@tauri-apps/plugin-opener": "^2.5.2",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.555.0",
+    "openchad-react": "^1.0.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "tailwind-merge": "^3.4.0",
+    "tailwindcss": "^4.1.17",
+    "tailwindcss-animate": "^1.0.7",
+    "tauri-plugin-pytauri-api": "^0.8.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/forms": "^0.5.10",
+    "@types/node": "^20.19.25",
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
+    "@types/react-syntax-highlighter": "^15.5.13",
+    "@vitejs/plugin-react": "^5.1.1",
+    "autoprefixer": "^10.4.22",
+    "baseline-browser-mapping": "^2.10.30",
+    "esbuild": "^0.27.3",
+    "postcss": "^8.5.6",
+    "typescript": "^5.9.3",
+    "vite": "^7.2.6",
+    "vite-plugin-splash-screen": "^0.2.2",
+    "vite-tsconfig-paths": "^6.1.1"
+  },
+  "engines": {
+    "node": ">=18.17.0"
+  }
+}

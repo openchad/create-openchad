@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iframe Mirroring Test</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        h1 {
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        .controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #1a1a1a;
+            border-radius: 8px;
+            align-items: center;
+        }
+        button {
+            padding: 8px 16px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.2s;
+        }
+        button:hover {
+            background: #1d4ed8;
+        }
+        button.active {
+            background: #16a34a;
+        }
+        .info {
+            margin-left: auto;
+            font-size: 14px;
+            color: #888;
+        }
+        .layout-container {
+            position: relative;
+            width: 100%;
+            height: 600px;
+            background: #1a1a1a;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .iframe-wrapper {
+            position: absolute;
+            border: 2px solid #333;
+            background: #0a0a0a;
+            transition: all 0.3s ease;
+        }
+        .iframe-placeholder {
+            width: 100%;
+            height: 100%;
+            background: #222;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-size: 14px;
+        }
+        .status {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 12px 16px;
+            background: #16a34a;
+            border-radius: 8px;
+            font-size: 14px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+        .pulse {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: #fff;
+            border-radius: 50%;
+            margin-right: 8px;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%,
+            100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.3;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔄 Iframe Mirroring Test</h1>
+        <div class="controls">
+            <button id="btn-single" class="active">Single</button>
+            <button id="btn-dual">Dual</button>
+            <button id="btn-triple">Triple</button>
+            <button id="btn-grid">Grid 2x2</button>
+            <button id="btn-cycle">Cycle Layouts</button>
+            <div class="info">Layout changes: <strong id="counter">0</strong></div>
+        </div>
+        <div class="layout-container">
+            <div id="iframe-1" class="iframe-wrapper">
+                <div class="iframe-placeholder">Iframe 1 would be here</div>
+            </div>
+            <div id="iframe-2" class="iframe-wrapper" style="display: none;">
+                <div class="iframe-placeholder">Iframe 2 would be here</div>
+            </div>
+            <div id="iframe-3" class="iframe-wrapper" style="display: none;">
+                <div class="iframe-placeholder">Iframe 3 would be here</div>
+            </div>
+            <div id="iframe-4" class="iframe-wrapper" style="display: none;">
+                <div class="iframe-placeholder">Iframe 4 would be here</div>
+            </div>
+        </div>
+    </div>
+    <div class="status">
+        <span class="pulse"></span>
+        Iframes stay persistent across layouts
+    </div>
+    <script>
+        let count = 0;
+        const counter = document.getElementById('counter');
+        const buttons = {
+            single: document.getElementById('btn-single'),
+            dual: document.getElementById('btn-dual'),
+            triple: document.getElementById('btn-triple'),
+            grid: document.getElementById('btn-grid'),
+            cycle: document.getElementById('btn-cycle')
+        };
+        const iframes = {
+            1: document.getElementById('iframe-1'),
+            2: document.getElementById('iframe-2'),
+            3: document.getElementById('iframe-3'),
+            4: document.getElementById('iframe-4')
+        };
+        function setLayout(layout) {
+            // Remove active class from all buttons
+            Object.values(buttons).forEach(btn => {
+                if (btn !== buttons.cycle) btn.classList.remove('active');
+            });
+            // Hide all iframes
+            Object.values(iframes).forEach(iframe => {
+                iframe.style.display = 'none';
+            });
+            switch (layout) {
+                case 'single':
+                    buttons.single.classList.add('active');
+                    iframes[1].style.display = 'block';
+                    iframes[1].style.left = '0';
+                    iframes[1].style.top = '0';
+                    iframes[1].style.width = '100%';
+                    iframes[1].style.height = '100%';
+                    break;
+                case 'dual':
+                    buttons.dual.classList.add('active');
+                    iframes[1].style.display = 'block';
+                    iframes[1].style.left = '0';
+                    iframes[1].style.top = '0';
+                    iframes[1].style.width = '50%';
+                    iframes[1].style.height = '100%';
+                    iframes[2].style.display = 'block';
+                    iframes[2].style.left = '50%';
+                    iframes[2].style.top = '0';
+                    iframes[2].style.width = '50%';
+                    iframes[2].style.height = '100%';
+                    break;
+                case 'triple':
+                    buttons.triple.classList.add('active');
+                    iframes[1].style.display = 'block';
+                    iframes[1].style.left = '0';
+                    iframes[1].style.top = '0';
+                    iframes[1].style.width = '50%';
+                    iframes[1].style.height = '50%';
+                    iframes[2].style.display = 'block';
+                    iframes[2].style.left = '50%';
+                    iframes[2].style.top = '0';
+                    iframes[2].style.width = '50%';
+                    iframes[2].style.height = '50%';
+                    iframes[3].style.display = 'block';
+                    iframes[3].style.left = '0';
+                    iframes[3].style.top = '50%';
+                    iframes[3].style.width = '100%';
+                    iframes[3].style.height = '50%';
+                    break;
+                case 'grid':
+                    buttons.grid.classList.add('active');
+                    iframes[1].style.display = 'block';
+                    iframes[1].style.left = '0';
+                    iframes[1].style.top = '0';
+                    iframes[1].style.width = '50%';
+                    iframes[1].style.height = '50%';
+                    iframes[2].style.display = 'block';
+                    iframes[2].style.left = '50%';
+                    iframes[2].style.top = '0';
+                    iframes[2].style.width = '50%';
+                    iframes[2].style.height = '50%';
+                    iframes[3].style.display = 'block';
+                    iframes[3].style.left = '0';
+                    iframes[3].style.top = '50%';
+                    iframes[3].style.width = '50%';
+                    iframes[3].style.height = '50%';
+                    iframes[4].style.display = 'block';
+                    iframes[4].style.left = '50%';
+                    iframes[4].style.top = '50%';
+                    iframes[4].style.width = '50%';
+                    iframes[4].style.height = '50%';
+                    break;
+            }
+            count++;
+            counter.textContent = count;
+        }
+        let cycleIndex = 0;
+        const layouts = ['single', 'dual', 'triple', 'grid'];
+        buttons.single.addEventListener('click', () => setLayout('single'));
+        buttons.dual.addEventListener('click', () => setLayout('dual'));
+        buttons.triple.addEventListener('click', () => setLayout('triple'));
+        buttons.grid.addEventListener('click', () => setLayout('grid'));
+        buttons.cycle.addEventListener('click', () => {
+            cycleIndex = (cycleIndex + 1) % layouts.length;
+            setLayout(layouts[cycleIndex]);
+        });
+        // Initialize with single layout
+        setLayout('single');
+        count = 0;
+        counter.textContent = count;
+    </script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+{
+  "name": "counter",
+  "version": "1.0.0",
+  "description": "Increment, decrement, reset, or get a counter value.",
+  "author": "Hafidz Ihza Pratama",
+  "requirements": []
+}
