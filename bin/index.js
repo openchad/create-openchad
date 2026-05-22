@@ -179,9 +179,9 @@ async function main() {
   console.clear();
   p.intro(pc.bgCyan(pc.black(' OpenChad Create AI-Driven App ')));
 
-  const pkgManager = 'pnpm';
+  const pkgManager = 'npm';
 
-  // ── Detect global uv early so we can inform the user ─────────────────────
+  //Detect global uv early so we can inform the user
   const globalUv = resolveGlobalUv();
 
   const project = await p.group(
@@ -247,7 +247,7 @@ async function main() {
   s.stop('Project structure created!');
 
   if (project.install) {
-    // ── 1. Node dependencies ────────────────────────────────────────────────
+    //1. Node dependencies
     const nodeSpinner = p.spinner();
     nodeSpinner.start(`Installing Node dependencies using ${pkgManager}...`);
 
@@ -258,7 +258,7 @@ async function main() {
         : 'Failed to install Node dependencies.'
     );
 
-    // ── 2. Python dependencies ──────────────────────────────────────────────
+    //2. Python dependencies
     const pythonDir = path.join(targetPath, 'python');
 
     if (fs.existsSync(pythonDir)) {
@@ -307,7 +307,7 @@ async function main() {
   p.outro(pc.green(`Project setup complete! 🚀`));
 
   console.log(pc.bold('Next steps:'));
-  console.log(`  ${pc.cyan(cdInstruction)}${pc.cyan(`${pkgManager} dev`)}\n`);
+  console.log(`  ${pc.cyan(cdInstruction)}${pc.cyan(`${pkgManager} run dev`)}\n`);
 }
 
 main().catch((err) => {
