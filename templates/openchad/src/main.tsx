@@ -2,9 +2,11 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import './globals.css'
 import App from './App'
-import { Container, type AppsProps } from "openchad-react"
+import { Container, OpenChadIcon, type Project } from "openchad-react"
 
-const Apps: AppsProps = {
+const Apps: Project = {
+  projectName: "OpenChad",
+  projectIcon: OpenChadIcon,
   defaultTab: {
     layout: "horizontal",
     icon: "default",
