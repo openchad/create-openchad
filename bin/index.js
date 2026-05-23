@@ -196,7 +196,7 @@ async function main() {
         }),
       install: () =>
         p.confirm({
-          message: `Do you want to install dependencies with ${pkgManager}?`,
+          message: `Do you want to install dependencies?`,
           initialValue: true,
         }),
     },
