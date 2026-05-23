@@ -5,7 +5,7 @@ import App from './App'
 import { Container, OpenChadIcon, type Project } from "openchad-react"
 
 const Apps: Project = {
-  projectName: "OpenChad",
+  projectName: "{{PROJECT_NAME}}",
   projectIcon: OpenChadIcon,
   defaultTab: {
     layout: "horizontal",
