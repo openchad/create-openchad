@@ -6,6 +6,13 @@ search_path = [
     "Tools",
     "Backend",
     "python",
+
+    "Pipeline/openchad/chat",
+    "Backend/openchad/litellm",
+    "Backend/openchad/llamacpp",
+    "ModelProvider/openchad/ProxyModelProvider",
+    "ModelProvider/openchad/LocalModelProvider",
+    "ModelProvider/openchad/LiteLLMModelProvider"
 ]
 extraPaths = [
     "ModelProvider",
@@ -13,4 +20,11 @@ extraPaths = [
     "Tools",
     "Backend",
     "python",
+
+    "Pipeline/openchad/chat",
+    "Backend/openchad/litellm",
+    "Backend/openchad/llamacpp",
+    "ModelProvider/openchad/ProxyModelProvider",
+    "ModelProvider/openchad/LocalModelProvider",
+    "ModelProvider/openchad/LiteLLMModelProvider"
 ]
