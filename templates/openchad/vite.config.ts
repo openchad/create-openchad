@@ -7,7 +7,6 @@ import tsconfigPaths from "vite-tsconfig-paths";
 // Helper to replace imports in production
 
 const ignoredDirs = [
-    'openchadpy',
     'python',
     'hafidz',
     'Backend',
@@ -77,16 +76,7 @@ export default defineConfig(({ mode }) => ({
                 target: 'http://127.0.0.1:2048',
                 changeOrigin: true,
             },
-        },
-        headers: {
-            "Content-Security-Policy": [
-                "default-src 'self' ipc: http://ipc.localhost",
-                "connect-src 'self' ipc: http://ipc.localhost https://esm.sh ws://localhost:*",
-                "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
-                "style-src 'self' 'unsafe-inline'",
-                "img-src 'self' asset: https://asset.localhost data: blob:",
-            ].join("; "),
-        },
+        }
     },
     build: {
         outDir: 'frontend',
