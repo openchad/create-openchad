@@ -79,6 +79,10 @@
 }
 
 @import "tailwindcss";
+
+@source "../node_modules/openchad-react/dist/index.mjs";
+@source "../node_modules/openchad-react/dist/ui/index.mjs";
+
 @plugin "tailwindcss-animate";
 @variant dark (&:where(.dark, .dark *));
 .thinkel  p {

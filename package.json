@@ -1,6 +1,6 @@
 {
   "name": "create-openchad",
-  "version": "1.0.37",
+  "version": "1.0.38",
   "description": "Easy tool for setup AI-Driven APP powered by OpenChad",
   "main": "bin/index.js",
   "bin": {
