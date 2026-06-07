@@ -1,6 +1,8 @@
 import subprocess
 import sys
 import os
+import threading
+from pathlib import Path
 
 def check_for_updates(uv_path, python_dir, env):
     """
@@ -22,12 +24,23 @@ def check_for_updates(uv_path, python_dir, env):
         # Gracefully ignore any errors (offline, timeout, etc.)
         print(f"Skipping update: {e}")
 
+def _tee(src, *dests):
+    for line in src:
+        for d in dests:
+            d.write(line)
+            d.flush()
+
+
+
 def main():
     # Get the directory of the current executable
     if getattr(sys, 'frozen', False):
         base_path = os.path.dirname(sys.executable)
     else:
         base_path = os.path.dirname(os.path.abspath(__file__))
+
+    log_path = Path(base_path) / "openchad.log"
+
     # Determine uv binary based on OS
     is_windows = os.name == "nt"
     uv_binary = "uv.exe" if is_windows else "uv"
@@ -51,9 +64,25 @@ def main():
     # Command to run: uv run python/main.py
     cmd = [uv_path, "run", "python/main.py"]
     try:
-        # Inherit stdout/stderr and wait for completion
-        process = subprocess.Popen(cmd, cwd=base_path, env=env, creationflags=subprocess.CREATE_NO_WINDOW) #pyrefly: ignore
-        process.wait()
+        with open(log_path, "wb") as log_file:
+            process = subprocess.Popen(
+                cmd,
+                cwd=base_path,
+                env=env,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                creationflags=subprocess.CREATE_NO_WINDOW if is_windows else 0,
+            )
+
+            t_out = threading.Thread(target=_tee, args=(process.stdout, sys.stdout.buffer, log_file))
+            t_err = threading.Thread(target=_tee, args=(process.stderr, sys.stderr.buffer, log_file))
+            t_out.start()
+            t_err.start()
+
+            process.wait()
+            t_out.join()
+            t_err.join()
+
         sys.exit(process.returncode)
     except Exception as e:
         print(f"Failed to start openchad: {e}")

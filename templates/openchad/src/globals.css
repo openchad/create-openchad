@@ -21,12 +21,64 @@
   font-style: normal;
   font-display: swap;
 }
+
+@font-face{
+  font-family: "Geist";
+  src: url("/Geist/Geist-VariableFont_wght.ttf") format("truetype");
+  /* variable font weight range */
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face{
+  font-family: "Geist";
+  src: url("/Geist/Geist-Italic-VariableFont_wght.ttf") format("truetype");
+  /* variable font weight range */
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+/* optional: fallback static weights (if you have them) */
+@font-face{
+  font-family: "Geist";
+  src: url("/Geist/static/Geist-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face{
+  font-family: "Geist";
+  src: url("/Geist/static/Geist-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face{
+  font-family: "Geist Mono";
+  src: url("/Geist_Mono/GeistMono-Italic-VariableFont_wght.ttf") format("truetype");
+  /* variable font weight range */
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+/* optional: fallback static weights (if you have them) */
+@font-face{
+  font-family: "Geist Mono";
+  src: url("/Geist_Mono/static/GeistMono-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face{
+  font-family: "Geist Mono";
+  src: url("/Geist_Mono/static/GeistMono-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 @import "tailwindcss";
-
-/* ADD THESE — tell Tailwind to scan your linked library */
-@source "../node_modules/openchad-react/dist/index.mjs";
-@source "../node_modules/openchad-react/dist/ui/index.mjs";
-
 @plugin "tailwindcss-animate";
 @variant dark (&:where(.dark, .dark *));
 .thinkel  p {
@@ -196,7 +248,7 @@
   --fgColor-attention: #d29922;
   --fgColor-danger: #f85149;
   --fgColor-done: #ab7df8;
-  --bgColor-muted: #151b23;
+  --bgColor-muted: #222222;
   --bgColor-neutral-muted: #656c7633;
   --bgColor-attention-muted: #bb800926;
   --borderColor-default: #3d444d;
@@ -241,6 +293,7 @@
 @layer base {
   * {
     @apply border-border;
+    font-family: "Geist", sans-serif;
   }
   button {
     @apply cursor-pointer;
@@ -381,7 +434,7 @@ body {
   --base-text-weight-normal: 400;
   --base-text-weight-medium: 500;
   --base-text-weight-semibold: 600;
-  --fontStack-monospace: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
+  --fontStack-monospace: "Geist Mono", monospace;
   --fgColor-accent: Highlight;
 }
 .markdown-body {
@@ -389,7 +442,7 @@ body {
   -webkit-text-size-adjust: 100%;
   margin: 0;
   color: var(--fgColor-default);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  font-family: "Geist", sans-serif;
   font-size: 16px;
   line-height: 1.5;
   word-wrap: break-word;
@@ -1298,6 +1351,146 @@ body {
 .markdown-body .highlight pre:has(+.zeroclipboard-container) {
   min-height: 52px;
 }
+
+/* ── Shared heading base ─────────────────────────────────── */
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3,
+.markdown-body h4,
+.markdown-body h5,
+.markdown-body h6 {
+  scroll-margin-top: 5rem;             /* scroll-m-20 */
+  margin-top: var(--base-size-24);
+  margin-bottom: var(--base-size-16);
+  font-weight: 600;                    /* font-semibold base */
+  line-height: 1.25;
+  letter-spacing: -0.025em;           /* tracking-tight */
+}
+ 
+/* ── h1 · scroll-m-20 text-4xl font-extrabold tracking-tight text-balance ── */
+.markdown-body h1 {
+  font-size: 2.4em;                  /* text-4xl */
+  font-weight: 800;                    /* font-extrabold */
+  text-wrap: balance;                  /* text-balance */
+  padding-bottom: 0;                   /* no border-bottom on h1 in shadcn */
+  border-bottom: none;
+}
+ 
+/* ── h2 · scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight ── */
+.markdown-body h2 {
+  font-size: 2em;                 /* text-3xl */
+  font-weight: 600;
+  padding-bottom: 0.5rem;             /* pb-2 */
+  border-bottom: 1px solid var(--borderColor-muted); /* border-b */
+}
+ 
+/* ── h3 · scroll-m-20 text-2xl font-semibold tracking-tight ── */
+.markdown-body h3 {
+  font-size: 1.6em;                   /* text-2xl */
+  font-weight: 600;
+}
+ 
+/* ── h4 · scroll-m-20 text-xl font-semibold tracking-tight ── */
+.markdown-body h4 {
+  font-size: 1.25rem;                  /* text-xl */
+  font-weight: 600;
+}
+ 
+/* h5 / h6 — no shadcn equivalent; preserve existing scale */
+.markdown-body h5 {
+  font-size: 0.875em;
+  font-weight: 600;
+}
+ 
+.markdown-body h6 {
+  font-size: 0.85em;
+  font-weight: 600;
+  color: var(--fgColor-muted);
+}
+ 
+/* ── p · leading-7 [&:not(:first-child)]:mt-6 ── */
+.markdown-body p {
+  line-height: 1.867em;                   /* leading-7 */
+  font-weight: 300;
+  margin-top: 0;
+  margin-bottom: var(--base-size-16);
+}
+ 
+.markdown-body > p:not(:first-of-type) {
+  margin-top: 1.5rem;
+}
+
+.markdown-body > * > p:not(:first-child) {
+  margin-top: 1.5rem;
+}
+ 
+/* ── blockquote · mt-6 border-l-2 pl-6 italic ── */
+.markdown-body blockquote {
+  margin-top: 1.5rem;                  /* mt-6 */
+  margin-bottom: 0;
+  padding: 0 0 0 1.5rem;              /* pl-6 */
+  border-left: 2px solid var(--borderColor-default); /* border-l-2 */
+  font-style: italic;                  /* italic */
+  color: var(--fgColor-muted);
+}
+ 
+/* ── ul · my-6 ml-6 list-disc [&>li]:mt-2 ── */
+.markdown-body ul {
+  list-style: disc;
+  margin-top: 1.5rem;                  /* my-6 */
+  margin-bottom: 1.5rem;
+  margin-left: 1.5rem;                 /* ml-6 (shadcn uses ml, not pl) */
+  padding-left: 0;
+}
+ 
+.markdown-body ul > li {
+  margin-top: 0.5rem;                  /* [&>li]:mt-2 */
+  line-height: 1.5em;                   /* leading-7 */
+  font-weight: 300;
+}
+
+.markdown-body code {
+  font-family: "Geist Mono", monospace;
+}
+ 
+.markdown-body code,
+.markdown-body tt {
+  padding: 0.2rem 0.3rem;             /* py-[0.2rem] px-[0.3rem] */
+  margin: 0;
+  font-size: 0.875rem;                 /* text-sm */
+  font-weight: 400;                    /* font-semibold */
+  white-space: break-spaces;
+  background-color: hsl(var(--muted)); /* bg-muted */
+  border-radius: var(--radius, 0.375rem); /* rounded */
+  position: relative;
+}
+ 
+.markdown-body pre > code,
+.markdown-body pre > tt {
+  padding: 0;
+  margin: 0;
+  font-size: 100%;
+  font-weight: 400;                    /* undo font-semibold for blocks */
+  white-space: pre;
+  background: transparent;
+  border: 0;
+}
+
+.markdown-body table th,
+.markdown-body table td {
+  padding: 0.5rem 1rem;               /* py-2 px-4 */
+  border: 1px solid var(--borderColor-default);
+  text-align: left;
+}
+ 
+.markdown-body table th {
+  font-weight: 700;                    /* font-bold */
+}
+ 
+.markdown-body table tr:nth-child(2n) {
+  background-color: hsl(var(--muted)); /* even:bg-muted */
+}
+
 /* Jiggle animation for App Explorer Edit Mode */
 @keyframes jiggle {
   0% {

@@ -136,7 +136,6 @@ try {
   die(`PyInstaller failed: ${err.message}`);
 }
 
-// 5. Copy project directories into Release/
 const DIRS_TO_COPY = [
   "Backend",
   "ModelProvider",
@@ -145,6 +144,8 @@ const DIRS_TO_COPY = [
   "python",
   "Settings",
   "frontend",
+  "icons",
+  "capabilities"
 ];
 
 log("Copying project directories into Release/ …");
@@ -154,6 +155,12 @@ for (const dir of DIRS_TO_COPY) {
   const dest = path.join(RELEASE_DIR,  dir);
   log(`  ${dir}  →  Release/${dir}`);
   copyDirSync(src, dest);
+}
+
+const tauriToml = path.join(PROJECT_ROOT, "Tauri.toml");
+if (fs.existsSync(tauriToml)) {
+  fs.copyFileSync(tauriToml, path.join(RELEASE_DIR, "Tauri.toml"));
+  log("  Tauri.toml  →  Release/Tauri.toml");
 }
 
 ok("All directories copied.");

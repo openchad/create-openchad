@@ -1,18 +1,31 @@
 "$schema" = "https://schema.tauri.app/config/2"
-productName = "openchad"
-version = "0.1.0"
+productName = "{{PROJECT_NAME}}"
+version = "0.1.19"
 identifier = "com.openchad.app"
 [build]
 frontendDist = "./frontend"
 [app]
 withGlobalTauri = true
 security.capabilities = ["default"]
+
 [[app.windows]]
-title = "openchad"
-width = 1680
-height = 945
+width = 1280
+height = 720
+title = "{{PROJECT_NAME}}"
+center = true
 decorations = false
+
+# Overlay-specific settings
+# resizable = false
+# transparent = true
+# alwaysOnTop = true
+# skipTaskbar = true
+# focusable = false       
+# shadow = false
+# contentProtected = true
+
 maximized = true
+
 [bundle]
 icon = [
     "icons/icon.png",
